@@ -1,3 +1,4 @@
+
 import { Stack, useGlobalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -5,6 +6,7 @@ import { Platform, SafeAreaView } from 'react-native';
 import { commonStyles } from '../styles/commonStyles';
 import { useEffect, useState } from 'react';
 import { setupErrorLogging } from '../utils/errorLogger';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const STORAGE_KEY = 'emulated_device';
 
@@ -47,20 +49,22 @@ export default function RootLayout() {
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={[commonStyles.wrapper, {
-          paddingTop: insetsToUse.top,
-          paddingBottom: insetsToUse.bottom,
-          paddingLeft: insetsToUse.left,
-          paddingRight: insetsToUse.right,
-       }]}>
-        <StatusBar style="light" />
-        <Stack
-          screenOptions={{
-            headerShown: false,
-            animation: 'default',
-          }}
-        />
-      </SafeAreaView>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <SafeAreaView style={[commonStyles.wrapper, {
+            paddingTop: insetsToUse.top,
+            paddingBottom: insetsToUse.bottom,
+            paddingLeft: insetsToUse.left,
+            paddingRight: insetsToUse.right,
+         }]}>
+          <StatusBar style="dark" />
+          <Stack
+            screenOptions={{
+              headerShown: false,
+              animation: 'default',
+            }}
+          />
+        </SafeAreaView>
+      </GestureHandlerRootView>
     </SafeAreaProvider>
   );
 }
